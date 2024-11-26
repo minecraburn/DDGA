@@ -37,11 +37,6 @@ for i = 1:length(D)
     RD2(i) = norm(DDGA_limit3_Dchange(:,:,i)-LE_limit3_Dchange(:,:,i),'fro')/norm(LE_limit3_Dchange(:,:,i),'fro');
 end
 
-%%
-
-landLE = LE_limit3_Dchange(1:4:end,1:4:end,3);
-landLE = landLE / sum(landLE,'all');
-
 %% Display KL and RD (FIG 1F)
 
 figure()
@@ -112,20 +107,6 @@ ax.FontSize = 18;
 
 figure()
 surf(0:step:8, 0:step:8, DDGA_limit3_Dchange(:,:,3))
-shading interp
-% xlabel('Lacl','FontSize',14);
-% ylabel('TetR','FontSize',14);
-% zlabel('P','FontSize',14);
-xlim([0, 8])
-ylim([0, 8])
-xticks([])
-yticks([])
-view([0, 90]);
-ax = gca;
-ax.FontSize = 18;
-
-figure()
-surf(0:step:8, 0:step:8, GA_limit3_Dchange(:,:,3)*0.7+DDGA_limit3_Dchange(:,:,3)*0.3)
 shading interp
 % xlabel('Lacl','FontSize',14);
 % ylabel('TetR','FontSize',14);
