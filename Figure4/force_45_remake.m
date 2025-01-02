@@ -1,11 +1,10 @@
 function F = force_45_remake(x,kks,sm)
 if(~exist('kks','var'))
-    kks = 0;  % 如果未出现该变量，则对其进行赋值
+    kks = 0;  % provide the value if absent
 end
 if(~exist('sm','var'))
-    sm=0.001;  % 如果未出现该变量，则对其进行赋值
+    sm = 0.001;  % provide the value if absent
 end
-
 
 n0=size(x);
 n0=n0(2);
@@ -237,7 +236,7 @@ ksw = 5 ; K1b = 0.1 ; K2b = 0.1 ; K3b = 0.1 ; K4b = 0.1 ; K5b = 0.1 ; K6b = 0.1 
 vscdc20i = 0.1 ; Vm3b = 8; Vm4b = 0.7 ; Vm5b = 5 ; V6b = 1 ; Vm7b = 1.2 ; Vm8b = 1 ; vspbi = 0.12 ; vswee1 = 0.06 ; xb1 = 1; xb2 = 1;
 ATRtot = 0.5 ; Chk1tot = 0.5 ; Cdc45tot = 0.5 ;
 kaatr = 0.022;
-kdatr = 0.15 ; kdpol = 0.2 ;
+kdatr = 0.15 ; kdpol = 0.2 ; 
 kdprim = 0.15 ; kspol = 0.8 ; ksprim = 0.05 ; K1cdc45 = 0.02 ; K2cdc45 = 0.02 ;
 K1chk = 0.5 ; K2chk = 0.5 ; Poltot = 0.5 ; V1cdc45 = 0.8 ; V2cdc45 = 0.12 ; V1chk = 4 ; V2chk = 0.1 ;
 

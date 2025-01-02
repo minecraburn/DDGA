@@ -19,8 +19,8 @@ neb=22;
 xsidel=0;xsider=0.5;
 ysidel=0;ysider=0.5;
 step=0.001;
-xla=[xsidel:step:xsider];
-yla=[ysidel:step:ysider];
+xla=xsidel:step:xsider;
+yla=ysidel:step:ysider;
 zla1=0*meshgrid(xla,yla);
 
 [xla,yla]=meshgrid(xla,yla);

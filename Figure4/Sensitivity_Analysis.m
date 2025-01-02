@@ -1,3 +1,4 @@
+clear;close all;clc
 %% Parameter settings
 n0 = 100;
 D = 0.1;
@@ -19,18 +20,19 @@ left = 1;
 right = 41;
 
 % if you want to test all the codes, choose "load_num=0"
-% or use "load_num=1" to load the results of the codes from the 29-th row to the 104-th row.
+% or use "load_num=1" to load the results of the codes from the 27-th row to the 108-th row.
 load_num = 1;
 % !!!! Warning: testing all the parameters by "load_num=0" will take a lot of time (2h~3h)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if load_num == 1
-    load bar_data.mat;
+    load BH_data.mat;
+    % each row: G0/G1 phase, S phase, G2 phase, M phase, G1 checkpoint, G2 checkpoint, M checkpoint
 elseif load_num == 0
     % Calculating limit cycle
     period=zeros(patry+1,40);
     periodnum=zeros(patry+1,1);
     xall=zeros(patry+1,50000,dim);
-    for parnum=left:1:right+1
+    for parnum=left:right+1
         if parnum == right+1
             parnum = patry+1;
         end
@@ -58,7 +60,7 @@ elseif load_num == 0
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % this step costs a lot of time
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    for parnum=left:1:right+1
+    for parnum=left:right+1
         if parnum == right+1
             parnum = patry+1;
         end
@@ -93,20 +95,23 @@ elseif load_num == 0
     % surf(xla,yla,zla,'DisplayName','');shading interp;
     
     % Calculating the barrier height
-    for parnum=left:1:right+1
+    for parnum=left:right+1
         if parnum == right+1
             parnum = patry+1;
         end
         seg_t=50;delt=0.001;
         cycle=xall(parnum,1:seg_t:period(parnum,periodnum(parnum,1))/delt+50-period(parnum,periodnum(parnum,1)-1)/delt+1,:);
         cycle=squeeze(cycle);
-        [barG1(parnum),barG2(parnum),barM(parnum)] = get_barrier_height(pcycle(parnum,:),cycle);
+        BH_data(parnum,:) = get_barrier_height(pcycle(parnum,:),cycle);
     end
 
 end
 %% Ploting the figure
+barG1 = BH_data(:,5) - BH_data(:,1); % G1 checkpoint - G0/G1 phase
+barG2 = BH_data(:,6) - BH_data(:,2); % G2 checkpoint - S phase
+barM = BH_data(:,7) - BH_data(:,3); % M checkpoint - G2 phase
 
-figure();
+figure()
 delbarG1=(barG1-barG1(42))/barG1(42);
 delbarG2=(barG2-barG2(42))/barG2(42);
 delbarM=(barM-barM(42))/barM(42);
@@ -116,8 +121,8 @@ histdata(:,2)=delbarG2(left:right);
 histdata(:,3)=delbarM(left:right);
 bar(histdata,1.2)
 set(gca,'FontSize',16);
-legend(["$\Delta_{rel}Barrier_{G1}$","$\Delta_{rel}Barrier_{G2}$","$\Delta_{rel}Barrier_{M}$"],...
-    'fontsize',16,"Interpreter","latex","Location","South","Orientation","horizontal")
+legend(["$\Delta Barrier_{G1}$","$\Delta Barrier_{G2}$","$\Delta Barrier_{M}$"],...
+    'fontsize',16,"Interpreter","latex","Location","South","Orientation","horizontal","Box","off")
 xlabel("Parameter labels",'fontsize',16)
-ylabel("$\Delta_{rel}Barrier(G1,G2,M)$",'fontsize',16,"Interpreter","latex")
+ylabel("$\Delta Barrier(G1,G2,M)$",'fontsize',16,"Interpreter","latex")
 set(gcf,"PaperSize",[30,20]);

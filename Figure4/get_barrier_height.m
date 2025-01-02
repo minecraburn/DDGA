@@ -1,6 +1,6 @@
-function [barG1,barG2,barM] = get_barrier_height(pcycle,cycle,if_plot)
+function BH_data = get_barrier_height(pcycle,cycle,if_plot)
 if(~exist('if_plot','var'))
-    if_plot = 0;  % 如果未出现该变量，则对其进行赋值
+    if_plot = 0;  % provide the value if absent
 end
 extrab=1;
 n0=size(cycle);
@@ -101,7 +101,7 @@ if extrab>0
 end
 if if_plot>0
     figure(parnum+100);
-    plot([1:n0+1],zla2);
+    plot(1:(n0+1),zla2);
     hold on
     scatter(basin1,zla2(basin1));
     scatter(bar1,zla2(bar1));
@@ -125,10 +125,6 @@ if if_plot>0
         scatter(xla2(basin4),yla2(basin4));
     end
 end
-barG1=zla2(bar1)-(zla2(basin1)+zla2(basin2))/2;
-barG2=zla2(bar2)-(zla2(basin2)+zla2(basin3))/2;
-if extrab>0
-    barM=zla2(bar3)-(zla2(basin3)+zla2(basin4))/2;
-else
-    barM=0;
-end
+
+BH_data = [zla2(basin1),zla2(basin2),zla2(basin3),zla2(basin4),...
+    zla2(bar1),zla2(bar2),zla2(bar3)];
