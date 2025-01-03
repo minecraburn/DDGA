@@ -88,6 +88,7 @@ ylim([0, 8])
 xticks([])
 yticks([])
 view([0, 90]);
+title("LE")
 ax = gca;
 ax.FontSize = 18;
 
@@ -102,6 +103,7 @@ ylim([0, 8])
 xticks([])
 yticks([])
 view([0, 90]);
+title("GA")
 ax = gca;
 ax.FontSize = 18;
 
@@ -116,5 +118,6 @@ ylim([0, 8])
 xticks([])
 yticks([])
 view([0, 90]);
+title("DDGA")
 ax = gca;
 ax.FontSize = 18;
