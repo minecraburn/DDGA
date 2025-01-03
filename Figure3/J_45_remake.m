@@ -1,9 +1,9 @@
-function J = force_45(x,Jac_45_dim,kks,sm)
+function J = J_45_remake(x,Jac_45_dim,kks,sm)
 if(~exist('kks','var'))
-    kks = 0;  % 如果未出现该变量，则对其进行赋值
+    kks = 0;  % provide the value if absent
 end
 if(~exist('sm','var'))
-    sm=0.001;  % 如果未出现该变量，则对其进行赋值
+    sm=0.001;  % provide the value if absent
 end
 
 GF = 0.5; Kagf = 0.1; kdap1 = 0.15; eps = 17; vsap1 = 1;

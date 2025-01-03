@@ -1,4 +1,4 @@
-function J = force_45(x,Jac_45_dim,kks,sm)
+function J = J_45_remake(x,Jac_45_dim,kks,sm)
 if(~exist('kks','var'))
     kks = 0;  % provide the value if absent
 end
